@@ -25,9 +25,10 @@ class App extends React.Component{
       .catch(err=>{
           console.log(err);
       });
-
-
-//followers data
+    
+  
+  
+// followers data ///had to hard code it because it would not rerender///
     axios.get(`https://api.github.com/users/fibonacci85/followers`)
       .then((res)=> {
         // console.log(res.data);
@@ -38,7 +39,8 @@ class App extends React.Component{
       .catch(err=>{
         console.log(err);
       });
-  }
+}
+  
 
   //Button Click
   handleClick = e => {
@@ -46,7 +48,8 @@ class App extends React.Component{
     axios.get(`https://api.github.com/users/${this.state.user}`)
     .then(res=>{
       this.setState({
-        user: res.data
+        user: res.data,
+        // followers: res.data
     });
   })
   }
