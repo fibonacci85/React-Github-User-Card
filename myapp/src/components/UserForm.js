@@ -6,8 +6,8 @@ function UserForm(props){
             <div className="formInput">
 
                 <form>
-                    <input />
-                    <button>Search</button>
+                    <input onChange={props.handleChange} type="text" />
+                    <button onClick={props.handleClick}>Search</button>
                 </form>
 
             </div>

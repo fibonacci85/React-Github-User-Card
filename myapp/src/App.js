@@ -8,17 +8,18 @@ import Followers from './components/Followers';
 class App extends React.Component{
 
   state = {
-    user: [],
-    followers: []
+    user: "",
+    followers: [],
   }
 
 //user data   
   componentDidMount() {
-    axios.get(`https://api.github.com/users/fibonacci85`)
+    axios.get(`https://api.github.com/users/${this.state.user}`)
       .then((res) => {
         // console.log(res.data);
         this.setState({
-          user: res.data
+          user: res.data,
+          followers: res.data
         })
       })
       .catch(err=>{
@@ -27,7 +28,7 @@ class App extends React.Component{
 
 
 //followers data
-    axios.get("https://api.github.com/users/fibonacci85/followers")
+    axios.get(`https://api.github.com/users/fibonacci85/followers`)
       .then((res)=> {
         // console.log(res.data);
         this.setState({
@@ -39,14 +40,32 @@ class App extends React.Component{
       });
   }
 
-  render(){
+  //Button Click
+  handleClick = e => {
+    e.preventDefault();
+    axios.get(`https://api.github.com/users/${this.state.user}`)
+    .then(res=>{
+      this.setState({
+        user: res.data
+    });
+  })
+  }
+
+  //Form Input 
+  handleChange = e => {
+    this.setState({
+      user: e.target.value
+    });
+  }
+
+  render() {
 
 
     return(
       <div>
 
         <h1>MY GITHUB</h1>
-        <UserForm />
+        <UserForm handleClick={this.handleClick} handleChange={this.handleChange}/>
         <UserProfile user={this.state.user} />
         <Followers followers={this.state.followers} />
       
@@ -54,5 +73,6 @@ class App extends React.Component{
     )
   }
 }
+
 
 export default App;

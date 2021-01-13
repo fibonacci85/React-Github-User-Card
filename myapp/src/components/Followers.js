@@ -2,7 +2,7 @@ import React from 'react';
 
 function Followers(props) {
 
-// console.log(props.followers[0].login)
+// console.log(props.followers)
 
     return(
         <div className="followersContainer">
