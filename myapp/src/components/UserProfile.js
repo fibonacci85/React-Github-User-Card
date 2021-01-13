@@ -10,7 +10,7 @@ class UserProfile extends React.Component{
         
         return(
             <div>
-                <p>My Github</p>
+                <p>My Github Test</p>
                 <p></p>
             </div>
         )
