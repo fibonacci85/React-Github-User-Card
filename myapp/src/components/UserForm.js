@@ -1,18 +1,19 @@
 import React from 'react';
 
-class UserForm extends React.Component{
+function UserForm(props){
 
-    render(){
-        
         return(
-            <div>
+            <div className="formInput">
+
                 <form>
                     <input />
                     <button>Search</button>
                 </form>
+
             </div>
+
         )
     }
-}
+
 
 export default UserForm;
