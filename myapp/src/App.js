@@ -8,51 +8,70 @@ import Followers from './components/Followers';
 class App extends React.Component{
 
   state = {
-    user: "",
+    user: {},
     followers: [],
   }
 
 //user data   
-  componentDidMount() {
-    axios.get(`https://api.github.com/users/${this.state.user}`)
-      .then((res) => {
-        // console.log(res.data);
-        this.setState({
-          user: res.data,
-          followers: res.data
-        })
-      })
-      .catch(err=>{
-          console.log(err);
-      });
+  // componentDidMount() {
+  //   axios.get(`https://api.github.com/users/${this.state.user}`)
+  //     .then((res) => {
+  //       // console.log(res.data);
+  //       this.setState({
+  //         user: res.data,
+  //       })
+  //     })
+  //     .catch(err=>{
+  //         console.log(err);
+  //     });
     
+  //   }
   
-  
-// followers data ///had to hard code it because it would not rerender///
-    axios.get(`https://api.github.com/users/fibonacci85/followers`)
+// // followers data ///had to hard code it because it would not rerender///
+    
+    handleClick = (e) => {
+    e.preventDefault();
+
+    axios.get(`https://api.github.com/users/${this.state.user}`)
+    .then((res) => {
+      // console.log(res.data);
+      this.setState({
+        user: res.data,
+      })
+    })
+    .catch(err=>{
+        console.log(err);
+    });
+
+
+
+    axios.get(`https://api.github.com/users/${this.state.user}/followers`)
       .then((res)=> {
         // console.log(res.data);
         this.setState({
           followers: res.data
+      
         })
       })
       .catch(err=>{
         console.log(err);
       });
-}
+    };
+    
+
   
 
   //Button Click
-  handleClick = e => {
-    e.preventDefault();
-    axios.get(`https://api.github.com/users/${this.state.user}`)
-    .then(res=>{
-      this.setState({
-        user: res.data,
-        // followers: res.data
-    });
-  })
-  }
+  // handleClick = e => {
+  //   e.preventDefault();
+  //   axios.get(`https://api.github.com/users/${this.state.user}/followers`)
+  //   .then(res=>{
+  //     this.setState({
+  //       user: res.data,
+  //       // followers: res.data
+  //   });
+  // })
+  // }
 
   //Form Input 
   handleChange = e => {
